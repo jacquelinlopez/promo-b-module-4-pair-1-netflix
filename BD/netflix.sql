@@ -81,7 +81,8 @@ FROM users
 WHERE plan_details = "Standard";
 
 DELETE FROM users 
-WHERE name LIKE "M%"
+WHERE name LIKE "M%";
+
 
 
 
