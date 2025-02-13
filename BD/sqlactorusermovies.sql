@@ -89,6 +89,13 @@ CREATE TABLE IF NOT EXISTS `diagrama-netflix`.`users_moviesfav` (
  SELECT * 
  FROM users_moviesfav;
  
+ -- ---
+ -- Table actors_movies
+ -- ---
+ 
+ INSERT INTO actors_movies (fk_idactors, fk_idmovies)
+ VALUES (1,3),(2,2),(3,1);
+ 
  
 
 SET SQL_MODE=@OLD_SQL_MODE;
