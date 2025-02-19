@@ -12,7 +12,7 @@ async function connectBD (){
   const conex = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      password:'21Almudenita09',
+      password:'2212',
       database:'netflix',
   });
   conex.connect();
@@ -46,7 +46,24 @@ server.get('/api/movies', async (req, res)=>{
           message: error,
       })
   }
-})
+});
+
+//filtro por genero 
+
+server.get("/api/movies/filter" , async (req,res) =>{
+  const {genre} = req.query;
+
+  const connection = await connectBD ();
+
+  const select = `SELECT *  from  movies where genre like ? `;
+
+  const [results] = await connection.query(select,[genre]);
+
+  res.json({
+    success: true,
+    movies:results
+  });
+});
 
 
 // Puerto
