@@ -13,7 +13,7 @@ async function connectBD (){
   const conex = await mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "X",
+    password: "x",
     database: "netflix",
   });
   conex.connect();
@@ -70,10 +70,10 @@ server.get("/api/movies/filter" , async (req,res) =>{
 // --> Si ponemos el foundMovie un id (1) nos sale la peli de id 1, pero si ponemos interrogación, nos sale un error de que las propiedades son undefined (title)
 
 server.get('/movie/:idMovies', async (req,res)=>{
-  const {id} = req.params; 
+  const {idMovies} = req.params; 
   const connection = await connectBD (); 
   const foundMovie = "SELECT * FROM movies WHERE idMovies = ?";
-  const [result] = await connection.query(foundMovie, [id]);
+  const [result] = await connection.query(foundMovie, [idMovies]);
   console.log(result)
 
 
