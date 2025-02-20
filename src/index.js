@@ -6,14 +6,15 @@ const mysql = require ("mysql2/promise");
 const server = express();
 server.use(cors());
 server.use(express.json());
+server.set("view engine", "ejs");
 
 // nos conectamos a la base de datos
 async function connectBD (){
   const conex = await mysql.createConnection({
-    host: process.env.HOSTDB,
-    user: process.env.USERDB,
-    password: process.env.PASSWORDDB,
-    database: process.env.DATABASE,
+    host: "localhost",
+    user: "root",
+    password: "21Almudenita09",
+    database: "netflix",
   });
   conex.connect();
   return conex;
@@ -65,9 +66,25 @@ server.get("/api/movies/filter" , async (req,res) =>{
   });
 });
 
+// endpoint para renderizar
+// --> Si ponemos el foundMovie un id (1) nos sale la peli de id 1, pero si ponemos interrogación, nos sale un error de que las propiedades son undefined (title)
+
+server.get('/movie/:idMovies', async (req,res)=>{
+  const {id} = req.params; 
+  const connection = await connectBD (); 
+  const foundMovie = "SELECT * FROM movies WHERE idMovies = ?";
+  const [result] = await connection.query(foundMovie, [id]);
+  console.log(result)
+
+
+  res.render("detail", {movie:result[0]})
+});
+
 
 // Puerto
-const serverPort = process.env.PORT;
+const serverPort = 4000;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
+
+
