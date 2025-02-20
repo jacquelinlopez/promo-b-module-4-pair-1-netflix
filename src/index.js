@@ -10,10 +10,10 @@ server.use(express.json());
 // nos conectamos a la base de datos
 async function connectBD (){
   const conex = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password:'2212',
-      database:'netflix',
+    host: process.env.HOSTDB,
+    user: process.env.USERDB,
+    password: process.env.PASSWORDDB,
+    database: process.env.DATABASE,
   });
   conex.connect();
   return conex;
@@ -67,7 +67,7 @@ server.get("/api/movies/filter" , async (req,res) =>{
 
 
 // Puerto
-const serverPort = 4000;
+const serverPort = process.env.PORT;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
