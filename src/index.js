@@ -13,7 +13,7 @@ async function connectBD (){
   const conex = await mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "21Almudenita09",
+    password: "X",
     database: "netflix",
   });
   conex.connect();
