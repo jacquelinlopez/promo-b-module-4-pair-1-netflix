@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
-    <h1>hola</h1>
-    <article>
-        <h3>
+    <h1 class="seleccion">Tu pelicula seleccionada</h1>
+    <article class="card">
+        <h3 class="title">
             <%= movie.title %>
         </h3>
 
-        <p>
+        <p class="genre">
             <%= movie.genre %>
         </p>
 
+        <img src="<%= movie.image %>" alt="Descripción de la imagen" class="img">
+        
 
-        <p>
+
+        <p class="category">
             <%= movie.category %>
         </p>
 
-        <p>
+        <p class="year">
             <%= movie.year %>
         </p>
 

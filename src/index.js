@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require ('express');
 const cors = require('cors');
 const mysql = require ("mysql2/promise");
 
@@ -13,7 +13,7 @@ async function connectBD (){
   const conex = await mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "x",
+    password: "2212",
     database: "netflix",
   });
   conex.connect();
@@ -82,9 +82,13 @@ server.get('/movie/:idMovies', async (req,res)=>{
 
 
 // Puerto
-const serverPort = 4000;
+const serverPort = 3307;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
 
+
+// Servidor de estaticos para impotar el css
+
+server.use(express.static('./css'));
 

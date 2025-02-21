@@ -1,0 +1,33 @@
+.seleccion{
+    color: red;
+}
+
+.title{
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.card{
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.img{
+    width: 150px;
+}
+
+.genre{
+    font-family: 'Roboto', sans-serif;
+}
+
+.category{
+    font-family: 'Roboto', sans-serif;
+}
+
+.year{
+    font-family: 'Roboto', sans-serif;
+}
