@@ -1,6 +1,8 @@
 const express = require ('express');
 const cors = require('cors');
 const mysql = require ("mysql2/promise");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 // create and config server
 const server = express();
@@ -13,7 +15,7 @@ async function connectBD (){
   const conex = await mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "2212",
+    password: "21Almudenita09",
     database: "netflix",
   });
   conex.connect();
@@ -80,6 +82,31 @@ server.get('/movie/:idMovies', async (req,res)=>{
   res.render("detail", {movie:result[0]})
 });
 
+
+// Registro usuarias
+server.post('/register', async (req,res)=> {
+  const conex = await connectBD();
+  const {email, password} = req.body;
+
+  const selectEmail = 'SELECT email from Users WHERE email =?';
+  const [emailResult] = await conex.query (selectEmail, [email]); 
+
+  if (emailResult.length === 0) {
+    const passwordHashed = await bcrypt.hash (password, 10);
+
+    const insertUser = 'INSERT INTO Users (email, password) values (?,?)';
+    const [result] = await conex.query (insertUser, [email, passwordHashed]);
+    res.status(201).json ({
+      success: true, 
+      userid: "nuevo-id-añadido"
+    });
+  }else{
+    res.status(200).json({
+      success: false, 
+      message: "El usuario ya existe"
+    });
+  }
+});
 
 // Puerto
 const serverPort = 3307;
